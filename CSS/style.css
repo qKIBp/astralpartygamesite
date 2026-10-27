@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+/* ========================================================
+   Astral Party Official Promotion Page Custom Styles
+   ======================================================== */
+
+:root {
+  --main-first: #2C68F6;
+  --main-second: #8F56CF;
+  --main-third: #EF25CB;
+  --main-gradient: linear-gradient(30deg, var(--main-first), var(--main-second), var(--main-third), var(--main-third));
+}
+
+/* Lenis Smooth Scroll Recommended Settings */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111319;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--main-first), var(--main-third));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-third);
+}
+
+/* Custom Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+.glass-nav {
+  background: rgba(44, 104, 246, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(239, 37, 203, 0.8);
+  box-shadow: 0 0 15px rgba(239, 37, 203, 0.4), inset 0 0 10px rgba(239, 37, 203, 0.2);
+}
+
+/* Swiper Custom Pagination (Dash Style matching design mockup) */
+.swiper-custom-pagination {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+}
+
+.swiper-custom-pagination .swiper-pagination-bullet {
+  width: 28px !important;
+  height: 5px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+  margin: 0 !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+
+.swiper-custom-pagination .swiper-pagination-bullet-active {
+  width: 52px !important;
+  background: #FFDD00 !important;
+  box-shadow: 0 0 12px rgba(255, 221, 0, 0.8) !important;
+}
+
+/* Floating Button Glow & Bounce Animation */
+@keyframes floatBob {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.floating-action-btn {
+  animation: floatBob 3.5s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  will-change: bottom;
+}
+
+.floating-action-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: drop-shadow(0 0 16px rgba(239, 37, 203, 0.7));
+}
+
+/* Submenu dropdown animation helper */
+.submenu-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+.submenu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
