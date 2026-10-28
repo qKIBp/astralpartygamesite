@@ -208,33 +208,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. Navigation Dropdown Animations
+  // 6. Navigation Menu Column Interactions & Slide Down
   // ==========================================
-  const navItems = document.querySelectorAll('.nav-menu-item');
-  navItems.forEach(item => {
-    const submenu = item.querySelector('.nav-submenu');
-    if (!submenu) return;
+  const mainHeader = document.querySelector('.main-header');
+  const mainNav = document.querySelector('.main-nav');
+  const menuColumns = document.querySelectorAll('.menu-column');
 
-    item.addEventListener('mouseenter', () => {
-      gsap.killTweensOf(submenu);
-      submenu.style.display = 'block';
-      gsap.fromTo(submenu, 
-        { opacity: 0, y: -6, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.25, ease: 'power2.out' }
-      );
+  if (mainNav) {
+    mainNav.addEventListener('mouseenter', () => {
+      mainNav.classList.add('is-open');
+      if (mainHeader) mainHeader.classList.add('is-expanded');
     });
 
-    item.addEventListener('mouseleave', () => {
-      gsap.killTweensOf(submenu);
-      gsap.to(submenu, {
-        opacity: 0,
-        y: -6,
-        scale: 0.98,
-        duration: 0.2,
-        ease: 'power2.in',
-        onComplete: () => {
-          submenu.style.display = 'none';
-        }
+    mainNav.addEventListener('mouseleave', () => {
+      mainNav.classList.remove('is-open');
+      if (mainHeader) mainHeader.classList.remove('is-expanded');
+    });
+  }
+
+  menuColumns.forEach(col => {
+    col.addEventListener('mouseenter', () => {
+      gsap.to(col, {
+        duration: 0.25,
+        ease: 'power2.out',
+        boxShadow: '0 12px 28px rgba(239, 37, 203, 0.45)'
+      });
+    });
+
+    col.addEventListener('mouseleave', () => {
+      gsap.to(col, {
+        duration: 0.25,
+        ease: 'power2.out',
+        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.25)'
       });
     });
   });

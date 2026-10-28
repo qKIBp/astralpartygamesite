@@ -87,8 +87,8 @@ html.lenis, html.lenis body {
 
 .swiper-custom-pagination .swiper-pagination-bullet-active {
   width: 52px !important;
-  background: #FFDD00 !important;
-  box-shadow: 0 0 12px rgba(255, 221, 0, 0.8) !important;
+  background: #2B2D36 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6) !important;
 }
 
 /* Floating Button Glow & Bounce Animation */
@@ -112,15 +112,65 @@ html.lenis, html.lenis body {
   filter: drop-shadow(0 0 16px rgba(239, 37, 203, 0.7));
 }
 
-/* Submenu dropdown animation helper */
-.submenu-enter {
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
+/* Header & Absolute Dropdown Background (Does NOT push main content) */
+.main-header {
+  height: 100px;
+  position: relative;
+  overflow: visible;
 }
-.submenu-enter-active {
+
+.header-dropdown-bg {
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+/* 메뉴바 호버 시 절대배치 배경이 160px 만큼 아래로 내려옴 (총 260px) */
+.main-header.is-expanded .header-dropdown-bg,
+.main-header:has(.main-nav:hover) .header-dropdown-bg {
+  height: 260px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+/* Submenu dropdown animation helper */
+.menu-column {
+  transition: border-radius 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+/* 서브메뉴가 펼쳐졌을 때는 각 칼럼의 바닥이 시안처럼 개별적으로 둥글게(rounded-b-2xl) 마감 */
+.main-nav:hover .menu-column,
+.main-nav.is-open .menu-column {
+  border-bottom-left-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+/* 칼럼 간 gap을 없애고 테두리를 겹쳐 2px 선 두께를 일정하게 유지 */
+.main-nav .menu-column + .menu-column {
+  margin-left: -2px;
+}
+
+.menu-sub-wrap {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, border-color 0.2s ease;
+  border-top: 2px solid transparent;
+}
+
+/* 네비게이션(메뉴바)에 호버 시 4개 칼럼의 서브메뉴가 160px 범위로 슬라이드다운 */
+.main-nav:hover .menu-sub-wrap,
+.main-nav.is-open .menu-sub-wrap {
+  max-height: 165px;
   opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  border-top-color: #ffffff;
+}
+
+.menu-column:hover {
+  z-index: 10;
+  box-shadow: 0 12px 28px rgba(239, 37, 203, 0.45);
 }
